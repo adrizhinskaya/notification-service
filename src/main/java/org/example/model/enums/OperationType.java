@@ -1,6 +1,6 @@
 package org.example.model.enums;
 
-public enum Operation {
+public enum OperationType {
     CREATE,
     DELETE,
 }
