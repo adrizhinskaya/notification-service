@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.EmailRequest;
+import org.example.model.enums.Operation;
 import org.example.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,15 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/email")
-public class EmailController {@Autowired
-private EmailService emailService;
+public class EmailController {
+    @Autowired
+    private EmailService emailService;
 
     @PostMapping("/send")
     public ResponseEntity<String> sendEmail(@RequestBody EmailRequest request) {
         try {
-            if ("CREATE".equals(request.getOperation())) {
+            if (Operation.CREATE.equals(request.getOperation())) {
                 emailService.sendWelcomeEmail(request.getEmail());
-            } else if ("DELETE".equals(request.getOperation())) {
+            } else if (Operation.DELETE.equals(request.getOperation())) {
                 emailService.sendGoodbyeEmail(request.getEmail());
             }
             return ResponseEntity.ok("Email sent successfully!");
